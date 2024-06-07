@@ -23,8 +23,6 @@
 #include <stdio.h>              // for sscanf, snprintf, fclose, fgets, fopen
 #include <stdlib.h>             // for free, calloc, getenv
 #include <string.h>             // for memcpy, NULL, memset, size_t, strerror
-#include <sys/param.h>          // for MAX
-#include <sys/time.h>           // for timeval
 #include <sys/types.h>          // for ssize_t
 #include <time.h>               // for time_t, time
 #include "auth.h"               // for ascii_to_bin, calculate_dynamic_key
@@ -42,12 +40,15 @@
 
 #ifdef _WIN32
 #include "win32/defs.h"
+#include <time.h>
 #else
 #include <arpa/inet.h>          // for inet_addr, inet_ntoa
 #include <netinet/in.h>         // for ntohl, in_addr_t, sockaddr_in, INADDR...
 #include <netinet/tcp.h>        // for TCP_NODELAY
 #include <sys/select.h>         // for FD_ISSET, FD_SET, select, FD_SETSIZE
 #include <sys/socket.h>         // for recvfrom, shutdown, sockaddr_storage
+#include <sys/param.h>          // for MAX
+#include <sys/time.h>           // for timeval
 #endif
 
 

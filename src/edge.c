@@ -26,8 +26,6 @@
 #include <stdio.h>                   // for printf, NULL, fclose, snprintf
 #include <stdlib.h>                  // for atoi, exit, calloc, free, malloc
 #include <string.h>                  // for strncpy, memset, strlen, strcmp
-#include <sys/param.h>               // for MIN
-#include <sys/time.h>                // for timeval
 #include <sys/types.h>               // for u_char
 #include <time.h>                    // for time
 #include <unistd.h>                  // for setuid, _exit, chdir, fork, getgid
@@ -44,12 +42,15 @@
 
 #ifdef _WIN32
 #include "win32/defs.h"
+#include <time.h>
 #else
 #include <arpa/inet.h>               // for inet_addr, inet_ntop
 #include <netinet/in.h>              // for INADDR_ANY, INADDR_NONE, ntohl
 #include <pwd.h>                     // for getpwnam, passwd
 #include <sys/select.h>              // for select, FD_ISSET, FD_SET, FD_ZERO
 #include <sys/socket.h>              // for AF_INET
+#include <sys/time.h>                // for timeval
+#include <sys/param.h>               // for MIN
 #endif
 
 /* *************************************************** */
