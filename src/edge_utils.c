@@ -24,7 +24,6 @@
 #include <stdio.h>                   // for snprintf, sprintf
 #include <stdlib.h>                  // for free, calloc, getenv
 #include <string.h>                  // for memcpy, memset, NULL, memcmp
-#include <sys/time.h>                // for timeval
 #include <sys/types.h>               // for time_t, ssize_t, u_int
 #include <time.h>                    // for time
 #include <unistd.h>                  // for gethostname, sleep
@@ -43,7 +42,9 @@
 #ifdef _WIN32
 #include "win32/defs.h"
 #include "win32/edge_utils_win32.h"
+#include <time.h>
 #else
+#include <sys/time.h>                // for timeval
 #include <arpa/inet.h>               // for inet_ntoa, inet_addr, inet_ntop
 #include <netinet/in.h>              // for sockaddr_in, ntohl, IPPROTO_IP
 #include <netinet/tcp.h>             // for TCP_NODELAY
