@@ -22,7 +22,7 @@
 #include <stdio.h>     // for printf, fprintf, size_t, stderr, stdout
 #include <string.h>    // for memset, strcpy, strncpy
 #include "hexdump.h"   // for fhexdump
-#include "n2n.h"       // for n2n_common_t, n2n_REGISTER_SUPER_t, n2n_REGIST...
+#include "n2n.h"       // for n2n_common, n2n_REGISTER_SUPER, n2n_REGIST...
 #include "n2n_wire.h"  // for encode_REGISTER, encode_REGISTER_SUPER, encode...
 
 
@@ -55,7 +55,7 @@ void print_mac (char *test_name, char *field, n2n_mac_t mac) {
            mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
 }
 
-void init_auth (n2n_auth_t *auth) {
+void init_auth (n2n_auth *auth) {
     auth->scheme = n2n_auth_simple_id;
     auth->token_size = 16;
     auth->token[0] = 0xfe;
@@ -64,13 +64,13 @@ void init_auth (n2n_auth_t *auth) {
     auth->token[15] = 0xfb;
 }
 
-void print_auth (char *test_name, char *field, n2n_auth_t *auth) {
+void print_auth (char *test_name, char *field, n2n_auth *auth) {
     printf("%s: %s.scheme = %i\n", test_name, field, auth->scheme);
     printf("%s: %s.token_size = %i\n", test_name, field, auth->token_size);
     printf("%s: %s.token[0] = 0x%02x\n", test_name, field, auth->token[0]);
 }
 
-void init_common (n2n_common_t *common, char *community) {
+void init_common (n2n_common *common, char *community) {
     memset( common, 0, sizeof(*common) );
     common->ttl = N2N_DEFAULT_TTL;
     common->flags = 0;
@@ -78,19 +78,19 @@ void init_common (n2n_common_t *common, char *community) {
     common->community[N2N_COMMUNITY_SIZE - 1] = '\0';
 }
 
-void print_common (char *test_name, n2n_common_t *common) {
+void print_common (char *test_name, n2n_common *common) {
     printf("%s: common.ttl = %i\n", test_name, common->ttl);
     printf("%s: common.flags = %i\n", test_name, common->flags);
     printf("%s: common.community = \"%s\"\n", test_name, common->community);
 }
 
-void test_REGISTER (n2n_common_t *common) {
+void test_REGISTER (n2n_common *common) {
     char *test_name = "REGISTER";
 
     common->pc = n2n_register;
     printf("%s: common.pc = %i\n", test_name, common->pc);
 
-    n2n_REGISTER_t reg;
+    n2n_REGISTER reg;
     memset( &reg, 0, sizeof(reg) );
     init_mac( reg.srcMac, 0,1,2,3,4,5);
     init_mac( reg.dstMac, 0x10,0x11,0x12,0x13,0x14,0x15);
@@ -119,13 +119,13 @@ void test_REGISTER (n2n_common_t *common) {
     printf("\n");
 }
 
-void test_REGISTER_SUPER (n2n_common_t *common) {
+void test_REGISTER_SUPER (n2n_common *common) {
     char *test_name = "REGISTER_SUPER";
 
     common->pc = n2n_register_super;
     printf("%s: common.pc = %i\n", test_name, common->pc);
 
-    n2n_REGISTER_SUPER_t reg;
+    n2n_REGISTER_SUPER reg;
     memset( &reg, 0, sizeof(reg) );
     init_mac( reg.edgeMac, 0x20,0x21,0x22,0x23,0x24,0x25);
     // n2n_sock_t sock
@@ -158,13 +158,13 @@ void test_REGISTER_SUPER (n2n_common_t *common) {
     printf("\n");
 }
 
-void test_UNREGISTER_SUPER (n2n_common_t *common) {
+void test_UNREGISTER_SUPER (n2n_common *common) {
     char *test_name = "UNREGISTER_SUPER";
 
     common->pc = n2n_unregister_super;
     printf("%s: common.pc = %i\n", test_name, common->pc);
 
-    n2n_UNREGISTER_SUPER_t unreg;
+    n2n_UNREGISTER_SUPER unreg;
     memset( &unreg, 0, sizeof(unreg) );
     init_auth(&unreg.auth);
     init_mac( unreg.srcMac, 0x30,0x31,0x32,0x33,0x34,0x35);
@@ -191,7 +191,7 @@ void test_UNREGISTER_SUPER (n2n_common_t *common) {
 int main (int argc, char * argv[]) {
     char *test_name = "environment";
 
-    n2n_common_t common;
+    n2n_common common;
     init_common( &common, "abc123def456z" );
     print_common( test_name, &common );
     printf("\n");

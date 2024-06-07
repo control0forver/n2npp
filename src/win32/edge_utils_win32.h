@@ -30,13 +30,13 @@
  */
 //#define SKIP_MULTICAST_PEERS_DISCOVERY
 
-// TODO: this struct is pretty empty now, collapse it to just n2n_edge_t ?
+// TODO: this struct is pretty empty now, collapse it to just n2n_edge ?
 struct tunread_arg {
-    n2n_edge_t *eee;
+    n2n_edge *eee;
 };
 
 extern HANDLE startTunReadThread (struct tunread_arg *arg);
-int get_best_interface_ip (n2n_edge_t * eee, dec_ip_str_t *ip_addr);
+int get_best_interface_ip (n2n_edge * eee, dec_ip_str_t *ip_addr);
 
 
 #endif /* _EDGE_UTILS_WIN32_H_ */

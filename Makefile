@@ -1,10 +1,11 @@
 # Our default make target
 all:
 
-export CC
+export CXX
 export AR
 export EXE
-export CFLAGS
+export CXXFLAGS
+export CPPFLAGS
 export LDFLAGS
 export LDLIBS
 export CONFIG_HOST_OS
@@ -17,7 +18,8 @@ ifndef CONFIG_HOST
 $(error Please run ./configure)
 endif
 
-CFLAGS+=-I./include
+CXXFLAGS+=-I./include -DNATIVELIBRARY_EXPORTS
+CPPFLAGS+=-DNATIVELIBRARY_EXPORTS
 LDFLAGS+=-L.
 
 #Ultrasparc64 users experiencing SIGBUS should try the following gcc options
@@ -26,11 +28,11 @@ PLATOPTS_SPARC64=-mcpu=ultrasparc -pipe -fomit-frame-pointer -ffast-math -finlin
 
 OPENSSL_CFLAGS=$(shell pkg-config openssl; echo $$?)
 ifeq ($(OPENSSL_CFLAGS), 0)
-  CFLAGS+=$(shell pkg-config --cflags-only-I openssl)
+  CXXFLAGS+=$(shell pkg-config --cflags-only-I openssl)
 endif
 
 WARN=-Wall
-CFLAGS+=$(DEBUG) $(OPTIMIZATION) $(WARN) $(OPTIONS) $(PLATOPTS)
+CXXFLAGS+=$(DEBUG) $(OPTIMIZATION) $(WARN) $(OPTIONS) $(PLATOPTS)
 
 # Quick sanity check on our build environment
 UNAME_S := $(shell uname -s)
@@ -96,8 +98,9 @@ N2N_OBJS=\
 	src/tuntap_netbsd.o \
 	src/tuntap_osx.o \
 	src/wire.o \
+	src/n2n_library.o \
 
-N2N_DEPS=$(wildcard include/*.h) $(wildcard src/*.c) config.mak
+N2N_DEPS=$(wildcard include/*.h) $(wildcard src/*.c) $(wildcard src/*.cpp) config.mak
 
 # As source files pass the linter, they can be added here (If all the source
 # is passing the linter tests, this can be refactored)
@@ -114,22 +117,22 @@ LINT_CCODE=\
 	include/sn_selection.h \
 	include/speck.h \
 	include/tf.h \
-	src/edge_management.c \
-	src/header_encryption.c \
-	src/management.c \
+	src/edge_management.cpp \
+	src/header_encryption.cpp \
+	src/management.cpp \
 	src/management.h \
-	src/sn_management.c \
-	src/sn_selection.c \
+	src/sn_management.cpp \
+	src/sn_selection.cpp \
 	src/strbuf.h \
-	src/transform_cc20.c \
-	src/transform_null.c \
+	src/transform_cc20.cpp \
+	src/transform_null.cpp \
 	src/tuntap_freebsd.c \
 	src/tuntap_linux.c \
 	src/tuntap_netbsd.c \
 	src/tuntap_osx.c \
-	src/win32/edge_utils_win32.c \
+	src/win32/edge_utils_win32.cpp \
 	src/win32/edge_utils_win32.h \
-	src/wire.c \
+	src/wire.cpp \
 	tools/tests-auth.c \
 	tools/tests-compress.c \
 	tools/tests-elliptic.c \
@@ -279,7 +282,7 @@ clean:
 distclean:
 	rm -f tests/*.out src/*.gcno src/*.gcda src/*.indent src/*.unc-backup*
 	rm -rf autom4te.cache/
-	rm -f config.log config.status configure include/config.h include/config.h.in
+	rm -f config.log config.status configure
 	rm -f doc/edge.8.gz doc/n2n.7.gz doc/supernode.1.gz
 	rm -f packages/debian/config.log packages/debian/config.status
 	rm -rf packages/debian/autom4te.cache/
@@ -320,7 +323,7 @@ build:
 	if [ ! -d "./build" ]; then mkdir ./build; fi
 	docker container cp builder:/usr/src/n2n/supernode ./build/supernode-$(OS)$(ARCHITECTURE)
 	docker container cp builder:/usr/src/n2n/edge ./build/edge-$(OS)$(ARCHITECTURE)
-	docker container rm -f builder
+	docker container.rm -f builder
 
 	docker build --build-arg COMMIT_HASH=$(N2N_COMMIT_HASH) -t $(DOCKER_IMAGE_TAGNAME) -f image-platforms/$(DOCKER_IMAGE_FILENAME) .
 	docker tag $(DOCKER_IMAGE_TAGNAME) $(DOCKER_IMAGE_NAME):latest$(ARCHITECTURE)

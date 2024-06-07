@@ -41,9 +41,9 @@
 # define _GETOPT_H 1
 #endif
 
-#ifdef	__cplusplus
-extern "C" {
-#endif
+//#ifdef	__cplusplus
+//extern "C" {
+//#endif
 
 /* For communication from `getopt' to the caller.
    When `getopt' finds an option that takes an argument,
@@ -177,9 +177,9 @@ extern int _getopt_internal ();
 # endif
 #endif /* __STDC__ */
 
-#ifdef	__cplusplus
-}
-#endif
+//#ifdef	__cplusplus
+//}
+//#endif
 
 /* Make sure we later can get all the definitions and declarations.  */
 #undef __need_getopt

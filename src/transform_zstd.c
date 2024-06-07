@@ -121,7 +121,7 @@ static void transop_tick_zstd (n2n_trans_op_t *arg, time_t now) {
 
 
 // zstd initialization function
-int n2n_transop_zstd_init (const n2n_edge_conf_t *conf, n2n_trans_op_t *ttt) {
+int n2n_transop_zstd_init (const n2n_edge_conf *conf, n2n_trans_op_t *ttt) {
 
     transop_zstd_t *priv;
 

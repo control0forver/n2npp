@@ -24,7 +24,7 @@
 #include <string.h>     // for memcpy, memset, memcmp, strncpy
 #include <sys/types.h>  // for ssize_t
 #include "hexdump.h"    // for fhexdump
-#include "n2n.h"        // for n2n_trans_op_t, n2n_edge_conf_t, n2n_common_t
+#include "n2n.h"        // for n2n_trans_op_t, n2n_edge_conf, n2n_common
 #include "n2n_wire.h"   // for decode_PACKET, decode_common, encode_PACKET
 
 
@@ -53,7 +53,7 @@ uint8_t PKT_CONTENT[]={
 
 /* Prototypes */
 static ssize_t do_encode_packet ( uint8_t * pktbuf, size_t bufsize, const n2n_community_t c );
-static void run_transop_benchmark (const char *op_name, n2n_trans_op_t *op_fn, n2n_edge_conf_t *conf, uint8_t *pktbuf);
+static void run_transop_benchmark (const char *op_name, n2n_trans_op_t *op_fn, n2n_edge_conf *conf, uint8_t *pktbuf);
 
 
 int main (int argc, char * argv[]) {
@@ -67,7 +67,7 @@ int main (int argc, char * argv[]) {
 #ifdef HAVE_ZSTD
     n2n_trans_op_t transop_zstd;
 #endif
-    n2n_edge_conf_t conf;
+    n2n_edge_conf conf;
 
     /* Init configuration */
     edge_init_conf_defaults(&conf);
@@ -131,9 +131,9 @@ int main (int argc, char * argv[]) {
 
 // --- transop benchmark ------------------------------------------------------------------
 
-static void run_transop_benchmark (const char *op_name, n2n_trans_op_t *op_fn, n2n_edge_conf_t *conf, uint8_t *pktbuf) {
-    n2n_common_t cmn;
-    n2n_PACKET_t pkt;
+static void run_transop_benchmark (const char *op_name, n2n_trans_op_t *op_fn, n2n_edge_conf *conf, uint8_t *pktbuf) {
+    n2n_common cmn;
+    n2n_PACKET pkt;
     n2n_mac_t mac_buf;
     uint8_t decodebuf[N2N_PKT_BUF_SIZE];
     size_t idx;
@@ -173,8 +173,8 @@ static ssize_t do_encode_packet ( uint8_t * pktbuf, size_t bufsize, const n2n_co
     // FIXME: this is a parameter of the test environment
     n2n_mac_t destMac={0,1,2,3,4,5};
 
-    n2n_common_t cmn;
-    n2n_PACKET_t pkt;
+    n2n_common cmn;
+    n2n_PACKET pkt;
     size_t idx;
 
 

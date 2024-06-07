@@ -8,7 +8,7 @@
 #ifndef MANAGEMENT_H
 #define MANAGEMENT_H 1
 
-#include <n2n_typedefs.h>  // For the n2n_edge_t and n2n_sn_t defs
+#include <n2n_typedefs.h>  // For the n2n_edge and n2n_sn defs
 #include <stdbool.h>
 #include <stddef.h>        // for size_t
 #include <stdint.h>        // for uint64_t
@@ -40,8 +40,8 @@ enum n2n_mgmt_type {
  *   - mgmt_password_hash
  */
 typedef struct mgmt_req {
-    n2n_sn_t *sss;
-    n2n_edge_t *eee;
+    n2n_sn *sss;
+    n2n_edge *eee;
     int mgmt_sock;                  // socket replies come from
     bool *keep_running;
     uint64_t mgmt_password_hash;
@@ -63,9 +63,9 @@ typedef struct mgmt_req {
 #define FLAG_WROK 1
 typedef struct mgmt_handler {
     int flags;
-    char  *cmd;
-    char  *help;
-    void (*func)(mgmt_req_t *req, strbuf_t *buf);
+    const char *cmd;
+    const char *help;
+    void (*func)(mgmt_req_t *req, strbuf *buf);
 } mgmt_handler_t;
 
 /*
@@ -73,11 +73,11 @@ typedef struct mgmt_handler {
  */
 typedef struct mgmt_events {
     enum n2n_event_topic topic;
-    char  *cmd;
-    char  *help;
+    const char *cmd;
+    const char *help;
 } mgmt_events_t;
 
-typedef size_t (mgmt_event_handler_t)(strbuf_t *buf, char *tag, int data0, void *data1);
+typedef size_t (mgmt_event_handler_t)(strbuf *buf, char *tag, int data0, void *data1);
 
 // Lookup the index of matching argv0 in a cmd list
 // store index in "Result", or -1 for not found
@@ -93,22 +93,22 @@ typedef size_t (mgmt_event_handler_t)(strbuf_t *buf, char *tag, int data0, void 
         } \
 } while(0)
 
-ssize_t send_reply (mgmt_req_t *req, strbuf_t *buf, size_t msg_len);
-size_t gen_json_1str (strbuf_t *buf, char *tag, char *_type, char *key, char *val);
-size_t gen_json_1uint (strbuf_t *buf, char *tag, char *_type, char *key, unsigned int val);
-void send_json_1str (mgmt_req_t *req, strbuf_t *buf, char *_type, char *key, char *val);
-void send_json_1uint (mgmt_req_t *req, strbuf_t *buf, char *_type, char *key, unsigned int val);
+ssize_t send_reply (mgmt_req_t *req, const strbuf *buf, size_t msg_len);
+size_t gen_json_1str (strbuf *buf, const char *tag, const char *_type, const char *key, const char *val);
+size_t gen_json_1uint (strbuf *buf, const char *tag, const char *_type, const char *key, const unsigned int val);
+void send_json_1str (mgmt_req_t *req, strbuf *buf, const char *_type, const char *key, const char *val);
+void send_json_1uint (mgmt_req_t *req, strbuf *buf, const char *_type, const char *key, const unsigned int val);
 
-void mgmt_error (mgmt_req_t *req, strbuf_t *buf, char *msg);
+void mgmt_error (mgmt_req_t *req, strbuf *buf, const char *msg);
 
-void mgmt_stop (mgmt_req_t *req, strbuf_t *buf);
-void mgmt_verbose (mgmt_req_t *req, strbuf_t *buf);
-void mgmt_unimplemented (mgmt_req_t *req, strbuf_t *buf);
+void mgmt_stop (mgmt_req_t *req, strbuf *buf);
+void mgmt_verbose (mgmt_req_t *req, strbuf *buf);
+void mgmt_unimplemented (mgmt_req_t *req, strbuf *buf);
 
 void mgmt_event_post2 (enum n2n_event_topic topic, int data0, void *data1, mgmt_req_t *debug, mgmt_req_t *sub, mgmt_event_handler_t fn);
-void mgmt_help_row (mgmt_req_t *req, strbuf_t *buf, char *cmd, char *help);
-void mgmt_help_events_row (mgmt_req_t *req, strbuf_t *buf, mgmt_req_t *sub, char *cmd, char *help);
+void mgmt_help_row (mgmt_req_t *req, strbuf *buf, const char *cmd, const char *help);
+void mgmt_help_events_row (mgmt_req_t *req, strbuf *buf, mgmt_req_t *sub, const char *cmd, const char *help);
 int mgmt_auth (mgmt_req_t *req, char *auth);
-bool mgmt_req_init2 (mgmt_req_t *req, strbuf_t *buf, char *cmdline);
+bool mgmt_req_init2 (mgmt_req_t *req, strbuf *buf, char *cmdline);
 
 #endif

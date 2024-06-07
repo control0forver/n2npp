@@ -100,18 +100,18 @@ int decode_cookie (n2n_cookie_t * out,
 
 int encode_common (uint8_t * base,
                    size_t * idx,
-                   const n2n_common_t * common);
+                   const n2n_common * common);
 
-int decode_common (n2n_common_t * out,
+int decode_common (n2n_common * out,
                    const uint8_t * base,
                    size_t * rem,
                    size_t * idx);
 
 int encode_sock (uint8_t * base,
                  size_t * idx,
-                 const n2n_sock_t * sock);
+                 const n2n_sock * sock);
 
-int decode_sock (n2n_sock_t * sock,
+int decode_sock (n2n_sock * sock,
                  const uint8_t * base,
                  size_t * rem,
                  size_t * idx);
@@ -120,67 +120,67 @@ int decode_sock (n2n_sock_t * sock,
 // REVISIT: best to be removed with 4.0
 int encode_sock_payload (uint8_t * base,
                          size_t * idx,
-                         const n2n_sock_t * sock);
+                         const n2n_sock * sock);
 
 // bugfix for https://github.com/ntop/n2n/issues/1029
 // REVISIT: best to be removed with 4.0
-int decode_sock_payload (n2n_sock_t * sock,
+int decode_sock_payload (n2n_sock * sock,
                          const uint8_t * base,
                          size_t * rem,
                          size_t * idx);
 
 int encode_REGISTER (uint8_t * base,
                      size_t * idx,
-                     const n2n_common_t * common,
-                     const n2n_REGISTER_t * reg);
+                     const n2n_common * common,
+                     const n2n_REGISTER * reg);
 
-int decode_REGISTER (n2n_REGISTER_t * pkt,
-                     const n2n_common_t * cmn, /* info on how to interpret it */
+int decode_REGISTER (n2n_REGISTER * pkt,
+                     const n2n_common * cmn, /* info on how to interpret it */
                      const uint8_t * base,
                      size_t * rem,
                      size_t * idx);
 
 int encode_REGISTER_SUPER (uint8_t * base,
                            size_t * idx,
-                           const n2n_common_t * common,
-                           const n2n_REGISTER_SUPER_t * reg);
+                           const n2n_common * common,
+                           const n2n_REGISTER_SUPER * reg);
 
-int decode_REGISTER_SUPER (n2n_REGISTER_SUPER_t * pkt,
-                           const n2n_common_t * cmn, /* info on how to interpret it */
+int decode_REGISTER_SUPER (n2n_REGISTER_SUPER * pkt,
+                           const n2n_common * cmn, /* info on how to interpret it */
                            const uint8_t * base,
                            size_t * rem,
                            size_t * idx);
 
 int encode_UNREGISTER_SUPER (uint8_t *base,
                              size_t *idx,
-                             const n2n_common_t *common,
-                             const n2n_UNREGISTER_SUPER_t *unreg);
+                             const n2n_common *common,
+                             const n2n_UNREGISTER_SUPER *unreg);
 
-int decode_UNREGISTER_SUPER (n2n_UNREGISTER_SUPER_t *unreg,
-                             const n2n_common_t *cmn, /* info on how to interpret it */
+int decode_UNREGISTER_SUPER (n2n_UNREGISTER_SUPER *unreg,
+                             const n2n_common *cmn, /* info on how to interpret it */
                              const uint8_t *base,
                              size_t *rem,
                              size_t *idx);
 
 int encode_REGISTER_ACK (uint8_t * base,
                          size_t * idx,
-                         const n2n_common_t * common,
-                         const n2n_REGISTER_ACK_t * reg);
+                         const n2n_common * common,
+                         const n2n_REGISTER_ACK * reg);
 
-int decode_REGISTER_ACK (n2n_REGISTER_ACK_t * pkt,
-                         const n2n_common_t * cmn, /* info on how to interpret it */
+int decode_REGISTER_ACK (n2n_REGISTER_ACK * pkt,
+                         const n2n_common * cmn, /* info on how to interpret it */
                          const uint8_t * base,
                          size_t * rem,
                          size_t * idx);
 
 int encode_REGISTER_SUPER_ACK (uint8_t * base,
                                size_t * idx,
-                               const n2n_common_t * cmn,
-                               const n2n_REGISTER_SUPER_ACK_t * reg,
+                               const n2n_common * cmn,
+                               const n2n_REGISTER_SUPER_ACK * reg,
                                uint8_t * tmpbuf);
 
-int decode_REGISTER_SUPER_ACK (n2n_REGISTER_SUPER_ACK_t * reg,
-                               const n2n_common_t * cmn, /* info on how to interpret it */
+int decode_REGISTER_SUPER_ACK (n2n_REGISTER_SUPER_ACK * reg,
+                               const n2n_common * cmn, /* info on how to interpret it */
                                const uint8_t * base,
                                size_t * rem,
                                size_t * idx,
@@ -188,51 +188,51 @@ int decode_REGISTER_SUPER_ACK (n2n_REGISTER_SUPER_ACK_t * reg,
 
 int encode_REGISTER_SUPER_NAK (uint8_t * base,
                                size_t * idx,
-                               const n2n_common_t * cmn,
-                               const n2n_REGISTER_SUPER_NAK_t * nak);
+                               const n2n_common * cmn,
+                               const n2n_REGISTER_SUPER_NAK * nak);
 
-int decode_REGISTER_SUPER_NAK (n2n_REGISTER_SUPER_NAK_t * nak,
-                               const n2n_common_t * cmn, /* info on how to interpret it */
+int decode_REGISTER_SUPER_NAK (n2n_REGISTER_SUPER_NAK * nak,
+                               const n2n_common * cmn, /* info on how to interpret it */
                                const uint8_t * base,
                                size_t * rem,
                                size_t * idx);
 
 int fill_sockaddr (struct sockaddr * addr,
                    size_t addrlen,
-                   const n2n_sock_t * sock);
+                   const n2n_sock * sock);
 
-int fill_n2nsock (n2n_sock_t* sock,
+int fill_n2nsock (n2n_sock* sock,
                   const struct sockaddr* sa);
 
 int encode_PACKET (uint8_t * base,
                    size_t * idx,
-                   const n2n_common_t * common,
-                   const n2n_PACKET_t * pkt);
+                   const n2n_common * common,
+                   const n2n_PACKET * pkt);
 
-int decode_PACKET (n2n_PACKET_t * pkt,
-                   const n2n_common_t * cmn, /* info on how to interpret it */
+int decode_PACKET (n2n_PACKET * pkt,
+                   const n2n_common * cmn, /* info on how to interpret it */
                    const uint8_t * base,
                    size_t * rem,
                    size_t * idx);
 
 int encode_PEER_INFO (uint8_t * base,
                       size_t * idx,
-                      const n2n_common_t * common,
-                      const n2n_PEER_INFO_t * pkt);
+                      const n2n_common * common,
+                      const n2n_PEER_INFO * pkt);
 
-int decode_PEER_INFO (n2n_PEER_INFO_t * pkt,
-                      const n2n_common_t * cmn, /* info on how to interpret it */
+int decode_PEER_INFO (n2n_PEER_INFO * pkt,
+                      const n2n_common * cmn, /* info on how to interpret it */
                       const uint8_t * base,
                       size_t * rem,
                       size_t * idx);
 
 int encode_QUERY_PEER (uint8_t * base,
                        size_t * idx,
-                       const n2n_common_t * common,
-                       const n2n_QUERY_PEER_t * pkt);
+                       const n2n_common * common,
+                       const n2n_QUERY_PEER * pkt);
 
-int decode_QUERY_PEER (n2n_QUERY_PEER_t * pkt,
-                       const n2n_common_t * cmn, /* info on how to interpret it */
+int decode_QUERY_PEER (n2n_QUERY_PEER * pkt,
+                       const n2n_common * cmn, /* info on how to interpret it */
                        const uint8_t * base,
                        size_t * rem,
                        size_t * idx);

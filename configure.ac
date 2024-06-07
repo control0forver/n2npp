@@ -8,9 +8,40 @@ AC_DEFINE([PACKAGE_BUILDDATE], "[m4_esyscmd([scripts/version.sh date | tr -d '\n
 AC_CONFIG_AUX_DIR(scripts)
 
 AC_CANONICAL_HOST
-AC_PROG_CC
+AC_PROG_CXX
+AC_LANG_PUSH([C++])
+AX_CXX_COMPILE_STDCXX([23], [noext], [mandatory])
+AC_LANG_POP([C++])
 AC_CHECK_TOOL([AR], [ar], [false])
 AC_CHECK_TOOL([WINDRES], [windres], [windres])
+
+# Use CXX as CC for compatibility with Makefile
+CC="$CXX"
+AC_SUBST(CC)
+
+# Add NATIVELIBRARY_EXPORTS to CXXFLAGS and CPPFLAGS
+CXXFLAGS="$CXXFLAGS -DNATIVELIBRARY_EXPORTS "
+CPPFLAGS="$CPPFLAGS -DNATIVELIBRARY_EXPORTS"
+AC_SUBST(CXXFLAGS)
+AC_SUBST(CPPFLAGS)
+
+# Check for MSVC compiler
+AC_MSG_CHECKING([for MSVC compiler])
+AC_COMPILE_IFELSE(
+    [AC_LANG_PROGRAM([], [[
+        #ifndef _MSC_VER
+        #error "Not MSVC"
+        #endif
+    ]])],
+    [
+        AC_MSG_RESULT([yes])
+        AC_DEFINE([__STDC__], [], [Define for MSVC])
+        AC_DEFINE([_CRT_SECURE_NO_WARNINGS], [], [Disable security warnings])
+    ],
+    [
+        AC_MSG_RESULT([no])
+    ]
+)
 
 case "$host_os" in
     solaris*)

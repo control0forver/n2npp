@@ -19,7 +19,7 @@
 
 #include <stdbool.h>
 #include <stdlib.h>      // for exit
-#include "n2n.h"         // for n2n_sn_t, open_socket, run_sn_loop, sn_init
+#include "n2n.h"         // for n2n_sn, open_socket, run_sn_loop, sn_init
 
 #ifdef _WIN32
 #include <winsock2.h>
@@ -32,7 +32,7 @@ static bool keep_running = true;
 
 int main () {
 
-        n2n_sn_t sss_node;
+        n2n_sn sss_node;
         int rc;
 
         sn_init_defaults(&sss_node);

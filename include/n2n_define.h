@@ -37,10 +37,10 @@
 /* Max available space to add supernodes' informations (sockets and MACs) in REGISTER_SUPER_ACK
  * Field sizes of REGISTER_SUPER_ACK as used in encode/decode fucntions in src/wire.c
  */
-#define REG_SUPER_ACK_PAYLOAD_SPACE     (DEFAULT_MTU - (sizeof(n2n_common_t) + sizeof(n2n_REGISTER_SUPER_ACK_t)))
+#define REG_SUPER_ACK_PAYLOAD_SPACE     (DEFAULT_MTU - (sizeof(n2n_common) + sizeof(n2n_REGISTER_SUPER_ACK)))
 
 /* Space needed to store socket and MAC address of a supernode */
-#define REG_SUPER_ACK_PAYLOAD_ENTRY_SIZE (sizeof(n2n_REGISTER_SUPER_ACK_payload_t))
+#define REG_SUPER_ACK_PAYLOAD_ENTRY_SIZE (sizeof(n2n_REGISTER_SUPER_ACK_payload))
 
 #define BOOTSTRAP_TIMEOUT                 3
 #define PURGE_REGISTRATION_FREQUENCY     30
@@ -210,12 +210,22 @@ enum skip_add {SN_ADD = 0, SN_ADD_SKIP = 1, SN_ADD_ADDED = 2};
 #define N2N_TRANSFORM_ID_USER_START         64
 #define N2N_TRANSFORM_ID_MAX                65535
 
+#ifdef NATIVELIBRARY_EXPORTS
+#define NATIVELIBRARY_API __declspec(dllexport)
+#else
+#define NATIVELIBRARY_API __declspec(dllimport)
+#endif
+
 #ifndef max
 #define max(a, b) (((a) < (b)) ? (b) : (a))
 #endif
 
 #ifndef min
 #define min(a, b) (((a) >(b)) ? (b) : (a))
+#endif
+
+#ifndef NEGATIVE_MASK
+#define NEGATIVE_MASK(x) (((x) >> 7) & 1 ? ~0U : 0U)
 #endif
 
 #endif

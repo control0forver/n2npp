@@ -34,7 +34,7 @@
 static int aes_mode = 0;
 static int running = 1;
 static char *ifname = NULL;
-static n2n_edge_conf_t conf;
+static n2n_edge_conf conf;
 static n2n_trans_op_t transop;
 static pcap_t *handle;
 static pcap_dumper_t *dumper;
@@ -94,7 +94,7 @@ static void write_packet(const u_char *packet, struct pcap_pkthdr *hdr) {
 /* *************************************************** */
 
 static int decode_encrypted_packet(const u_char *packet, struct pcap_pkthdr *header,
-          n2n_PACKET_t *pkt, int encrypted_offset) {
+          n2n_PACKET *pkt, int encrypted_offset) {
   uint8_t decoded_packet[encrypted_offset + N2N_PKT_BUF_SIZE];
   int decoded_eth_size;
   int transop_shift;
@@ -149,7 +149,7 @@ static int decode_encrypted_packet(const u_char *packet, struct pcap_pkthdr *hea
 #define ETH_SIZE 14
 #define UDP_SIZE 8
 #define MIN_IP_SIZE 20
-#define MIN_LEN (ETH_SIZE + UDP_SIZE + MIN_IP_SIZE + sizeof(n2n_common_t))
+#define MIN_LEN (ETH_SIZE + UDP_SIZE + MIN_IP_SIZE + sizeof(n2n_common))
 
 static int run_packet_loop() {
   struct pcap_pkthdr header;
@@ -158,8 +158,8 @@ static int run_packet_loop() {
   traceEvent(TRACE_NORMAL, "Capturing packets on %s...", ifname);
 
   while(running) {
-    n2n_common_t common;
-    n2n_PACKET_t pkt;
+    n2n_common common;
+    n2n_PACKET pkt;
     uint ipsize, common_offset;
     size_t idx, rem;
 

@@ -22,7 +22,7 @@
 #include <string.h>      // for memset, memcpy, memcmp, strncpy
 #include <sys/types.h>   // for ssize_t
 #include "curve25519.h"  // for curve25519
-#include "n2n.h"         // for n2n_trans_op_t, n2n_common_t, n2n_edge_conf_t
+#include "n2n.h"         // for n2n_trans_op_t, n2n_common, n2n_edge_conf
 #include "n2n_wire.h"    // for decode_PACKET, decode_common, encode_PACKET
 #include "pearson.h"     // for pearson_hash_64, pearson_hash_init
 
@@ -41,7 +41,7 @@ uint8_t PKT_CONTENT[DEFAULT_MTU];
 
 /* Prototypes */
 static ssize_t do_encode_packet( uint8_t * pktbuf, size_t bufsize, const n2n_community_t c );
-static void run_transop_benchmark(const char *op_name, n2n_trans_op_t *op_fn, n2n_edge_conf_t *conf, uint8_t *pktbuf);
+static void run_transop_benchmark(const char *op_name, n2n_trans_op_t *op_fn, n2n_edge_conf *conf, uint8_t *pktbuf);
 static void run_hashing_benchmark(void);
 static void run_ecc_benchmark(void);
 
@@ -60,7 +60,7 @@ int main(int argc, char * argv[]) {
 #endif
 
   n2n_trans_op_t transop_speck;
-  n2n_edge_conf_t conf;
+  n2n_edge_conf conf;
 
   print_n2n_version();
 
@@ -195,9 +195,9 @@ static void run_ecc_benchmark(void) {
 
 // --- transop benchmark ------------------------------------------------------------------
 
-static void run_transop_benchmark(const char *op_name, n2n_trans_op_t *op_fn, n2n_edge_conf_t *conf, uint8_t *pktbuf) {
-  n2n_common_t cmn;
-  n2n_PACKET_t pkt;
+static void run_transop_benchmark(const char *op_name, n2n_trans_op_t *op_fn, n2n_edge_conf *conf, uint8_t *pktbuf) {
+  n2n_common cmn;
+  n2n_PACKET pkt;
   n2n_mac_t mac_buf;
   uint8_t decodebuf[N2N_PKT_BUF_SIZE];
   const float target_sec = DURATION;
@@ -265,8 +265,8 @@ static void run_transop_benchmark(const char *op_name, n2n_trans_op_t *op_fn, n2
 static ssize_t do_encode_packet( uint8_t * pktbuf, size_t bufsize, const n2n_community_t c )
 {
   n2n_mac_t destMac={0,1,2,3,4,5};
-  n2n_common_t cmn;
-  n2n_PACKET_t pkt;
+  n2n_common cmn;
+  n2n_PACKET pkt;
   size_t idx;
 
 

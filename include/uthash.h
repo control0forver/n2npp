@@ -77,7 +77,8 @@ do {                                                                            
 #else
 #define DECLTYPE_ASSIGN(dst,src)                                                 \
 do {                                                                             \
-  (dst) = DECLTYPE(dst)(src);                                                    \
+  void* _p_src = (src);                                                          \
+  (dst) = DECLTYPE(dst)_p_src;                                                   \
 } while (0)
 #endif
 
@@ -1039,21 +1040,25 @@ do {                                                                            
                 HH_FROM_ELMT((head)->hh.tbl, _hs_p->next) : NULL);               \
             }                                                                    \
             _hs_psize--;                                                         \
-          } else if ((cmpfcn(                                                    \
-                DECLTYPE(head)(ELMT_FROM_HH((head)->hh.tbl, _hs_p)),             \
-                DECLTYPE(head)(ELMT_FROM_HH((head)->hh.tbl, _hs_q))              \
-                )) <= 0) {                                                       \
-            _hs_e = _hs_p;                                                       \
-            if (_hs_p != NULL) {                                                 \
-              _hs_p = ((_hs_p->next != NULL) ?                                   \
-                HH_FROM_ELMT((head)->hh.tbl, _hs_p->next) : NULL);               \
-            }                                                                    \
-            _hs_psize--;                                                         \
           } else {                                                               \
-            _hs_e = _hs_q;                                                       \
-            _hs_q = ((_hs_q->next != NULL) ?                                     \
-              HH_FROM_ELMT((head)->hh.tbl, _hs_q->next) : NULL);                 \
-            _hs_qsize--;                                                         \
+              void* p_p = (ELMT_FROM_HH((head)->hh.tbl, _hs_p));                 \
+              void* p_q = (ELMT_FROM_HH((head)->hh.tbl, _hs_q));                 \
+              if ((cmpfcn(                                                       \
+                DECLTYPE(head)p_p,                                               \
+                DECLTYPE(head)p_q                                                \
+                )) <= 0) {                                                       \
+                 _hs_e = _hs_p;                                                  \
+                 if (_hs_p != NULL) {                                            \
+                   _hs_p = ((_hs_p->next != NULL) ?                              \
+                     HH_FROM_ELMT((head)->hh.tbl, _hs_p->next) : NULL);          \
+                 }                                                               \
+                _hs_psize--;                                                     \
+              } else {                                                           \
+                _hs_e = _hs_q;                                                   \
+                _hs_q = ((_hs_q->next != NULL) ?                                 \
+                  HH_FROM_ELMT((head)->hh.tbl, _hs_q->next) : NULL);             \
+                _hs_qsize--;                                                     \
+              }                                                                  \
           }                                                                      \
           if ( _hs_tail != NULL ) {                                              \
             _hs_tail->next = ((_hs_e != NULL) ?                                  \

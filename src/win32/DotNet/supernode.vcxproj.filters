@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Source Files\n2n">
+      <UniqueIdentifier>{ab06fc90-e441-4eb9-9d8c-7bae289890e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\n2n\Win32">
+      <UniqueIdentifier>{2db84052-84c6-45d7-aae3-e585ade49398}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\n2n">
+      <UniqueIdentifier>{99f961f3-d983-4882-803a-87ae0b740322}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\n2n\Win32">
+      <UniqueIdentifier>{d2f423d7-ebb5-481a-b093-72dcfc1b86eb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\n2n.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wire.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\aes.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\auth.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\cc20.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\curve25519.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\edge_management.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\edge_utils.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\header_encryption.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\management.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minilzo.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\n2n_regex.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\network_traffic_filter.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\pearson.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\random_numbers.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sn_management.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sn_selection.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sn_utils.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\speck.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tf.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\transform_aes.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\transform_cc20.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\transform_lzo.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\transform_null.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\transform_speck.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\transform_tf.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\supernode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\win32\edge_utils_win32.cpp">
+      <Filter>Source Files\n2n\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\getopt.cpp">
+      <Filter>Source Files\n2n\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\getopt1.cpp">
+      <Filter>Source Files\n2n\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\win32\wintap.cpp">
+      <Filter>Source Files\n2n\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\n2n_library.cpp">
+      <Filter>Source Files\n2n</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\win32\defs.h">
+      <Filter>Header Files\n2n\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\win32\wintap.h">
+      <Filter>Header Files\n2n\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\win32\edge_utils_win32.h">
+      <Filter>Header Files\n2n\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\win32\n2n_win32.h">
+      <Filter>Header Files\n2n\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\win32\unistd.h">
+      <Filter>Header Files\n2n\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\win32\getopt.h">
+      <Filter>Header Files\n2n\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\supernode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\minilzo.h">
+      <Filter>Header Files\n2n</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\strbuf.h">
+      <Filter>Header Files\n2n</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\n2n_wire.h">
+      <Filter>Header Files\n2n</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\n2n_library.hpp">
+      <Filter>Header Files\n2n</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\n2n_define.h">
+      <Filter>Header Files\n2n</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\n2n.h">
+      <Filter>Header Files\n2n</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\management.h">
+      <Filter>Header Files\n2n</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\lzodefs.h">
+      <Filter>Header Files\n2n</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\lzoconf.h">
+      <Filter>Header Files\n2n</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ustring.h">
+      <Filter>Header Files\n2n</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\IOptions.h">
+      <Filter>Header Files\n2n</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\IDaemon.h">
+      <Filter>Header Files\n2n</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\doc\Hacking.md" />
+    <None Include="..\..\..\README.md" />
+  </ItemGroup>
+</Project>

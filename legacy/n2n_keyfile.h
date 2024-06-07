@@ -86,7 +86,7 @@
 /** This structure stores an encryption cipher spec. */
 struct n2n_cipherspec
 {
-    n2n_transform_t     t;                      /* N2N_TRANSFORM_ID_xxx for this spec. */
+    n2n_transform     t;                      /* N2N_TRANSFORM_ID_xxx for this spec. */
     time_t              valid_from;             /* Start using the key at this time. */
     time_t              valid_until;            /* Key is valid if time < valid_until. */
     uint16_t            opaque_size;            /* Size in bytes of key. */

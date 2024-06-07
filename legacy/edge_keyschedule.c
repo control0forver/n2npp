@@ -17,7 +17,7 @@ typedef n2n_tostat_t    (*n2n_transtick_f)( struct n2n_trans_op * arg,
  *  will then determine the best SA for that trans_op from the key schedule to
  *  use for encoding. */
 
-static int edge_init_keyschedule(n2n_edge_t *eee) {
+static int edge_init_keyschedule(n2n_edge *eee) {
 #define N2N_NUM_CIPHERSPECS 32
 
   int retval = -1;
@@ -34,7 +34,7 @@ static int edge_init_keyschedule(n2n_edge_t *eee) {
 
       for (i=0; i < (size_t)numSpecs; ++i)
         {
-	  n2n_transform_t idx = (n2n_transform_t) specs[i].t;
+	  n2n_transform idx = (n2n_transform) specs[i].t;
 	  if(idx != eee->transop.transform_id) {
 	    traceEvent(TRACE_ERROR, "changing transop in keyschedule is not supported");
 	    retval = -1;

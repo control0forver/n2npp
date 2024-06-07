@@ -24,23 +24,23 @@ typedef char selection_criterion_str_t[SN_SELECTION_CRITERION_BUF_SIZE];
 #include "n2n.h"
 
 /* selection criterion's functions */
-int sn_selection_criterion_init (peer_info_t *peer);
+int sn_selection_criterion_init (peer_info *peer);
 int sn_selection_criterion_default (SN_SELECTION_CRITERION_DATA_TYPE *selection_criterion);
 int sn_selection_criterion_bad (SN_SELECTION_CRITERION_DATA_TYPE *selection_criterion);
 int sn_selection_criterion_good (SN_SELECTION_CRITERION_DATA_TYPE *selection_criterion);
-int sn_selection_criterion_calculate (n2n_edge_t *eee, peer_info_t *peer, SN_SELECTION_CRITERION_DATA_TYPE *data);
+int sn_selection_criterion_calculate (n2n_edge *eee, peer_info *peer, SN_SELECTION_CRITERION_DATA_TYPE *data);
 
 /* common data's functions */
-int sn_selection_criterion_common_data_default (n2n_edge_t *eee);
+int sn_selection_criterion_common_data_default (n2n_edge *eee);
 
 /* sorting function */
-int sn_selection_sort (peer_info_t **peer_list);
+int sn_selection_sort (peer_info **peer_list);
 
 /* gathering data function */
-SN_SELECTION_CRITERION_DATA_TYPE sn_selection_criterion_gather_data (n2n_sn_t *sss);
+SN_SELECTION_CRITERION_DATA_TYPE sn_selection_criterion_gather_data (n2n_sn *sss);
 
 /* management port output function */
-extern char * sn_selection_criterion_str (n2n_edge_t *eee, selection_criterion_str_t out, peer_info_t *peer);
+extern char * sn_selection_criterion_str (n2n_edge *eee, selection_criterion_str_t out, peer_info *peer);
 
 
 #endif /* _SN_SELECTION_ */
