@@ -1,0 +1,2 @@
+#define PACKAGE_VERSION "3.1.1"
+#define PACKAGE_BUILDDATE __DATE__" "__TIME__

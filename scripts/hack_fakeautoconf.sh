@@ -3,11 +3,6 @@
 # Specifically for windows, where installing autoconf looks suspiciously
 # like boiling the ocean.
 
-cat <<EOF >include/config.h.in
-// Created by hack fake autoconf for windows
-// not actually a config input
-EOF
-
 cat <<EOF >configure
 #!/bin/sh
 echo Created by hack fake autoconf for windows
@@ -27,9 +22,4 @@ WINDRES=windres
 CFLAGS=$CFLAGS -g -O2
 LDFLAGS=$LDFLAGS
 LDLIBS_EXTRA=-lnetapi32 -lws2_32 -liphlpapi
-EOF
-
-cat <<EOF >include/config.h
-#define PACKAGE_VERSION "FIXME"
-#define PACKAGE_BUILDDATE "$(date)"
 EOF
