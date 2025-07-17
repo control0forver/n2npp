@@ -6,3 +6,6 @@
     path = thirdparty/libnatpmp
     url = https://github.com/miniupnp/libnatpmp.git
     ignore = dirty
+[submodule "src/win32/n2ngo-wintap"]
+	path = src/win32/n2ngo-wintap
+	url = https://github.com/control0forver/n2ngo-wintap
